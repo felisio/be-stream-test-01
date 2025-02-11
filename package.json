@@ -18,9 +18,10 @@
     "typescript": "^5.4.3"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.19.2"
   },
   "engines": {
-    "node": "22.x"
+    "node": "20.x"
   }
 }

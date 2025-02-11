@@ -1,19 +1,22 @@
 import express from "express";
+import cors from "cors";
 const app = express();
 const port = 3000;
 
+app.use(cors());
+
 app.get("/", (req, res) => {
-  res.send("Hello Stream!");
+  res.send("Hello Stream Typescript!");
 });
 
 app.get("/stream", async (req, res) => {
   // Set headers for SSE
-  res.setHeader('Content-Type', 'text/event-stream');
-  res.setHeader('Cache-Control', 'no-cache');
-  res.setHeader('Connection', 'keep-alive');
+  res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("Connection", "keep-alive");
 
   // Send a message every 2 seconds
-  
+
   /* const intervalId = setInterval(() => {
     const data = JSON.stringify({ message: `Server time: ${new Date().toLocaleTimeString()}` });
     res.write(`data: ${data}\n\n`); // SSE format: "data: <content>\n\n"
@@ -25,22 +28,22 @@ app.get("/stream", async (req, res) => {
     "How can I assist ",
     "you today? ",
     "I am a chatbot ",
-    "simulating responses."
-];
-let index = 0;
-const interval = setInterval(() => {
-  if (index < mockResponse.length) {
+    "simulating responses.",
+  ];
+  let index = 0;
+  const interval = setInterval(() => {
+    if (index < mockResponse.length) {
       res.write(`data: ${mockResponse[index]}\n\n`);
       index++;
-  } else {
+    } else {
       res.write("data: [DONE]\n\n");
       clearInterval(interval);
       res.end();
-  }
-}, 500); // Simulate a delay for a real-time effect
+    }
+  }, 500); // Simulate a delay for a real-time effect
 
   // Clean up on client disconnect
-  req.on('close', () => {
+  req.on("close", () => {
     clearInterval(interval);
     res.end();
   });
