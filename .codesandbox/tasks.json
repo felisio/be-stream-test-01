@@ -17,6 +17,14 @@
         "port": 3000
       }
     },
+    "dev": {
+      "name": "dev",
+      "command": "yarn dev",
+      "runAtStart": true,
+      "preview": {
+        "port": 3000
+      }
+    },
     "install": {
       "name": "install dependencies",
       "command": "yarn install"
