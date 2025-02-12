@@ -3,20 +3,25 @@ const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(express.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send("Hello Stream Cors!");
+  res.send("Test Event Stream 😎");
 });
 
 app.get("/stream", async (req, res) => {
+  const { prompt } = req.body;
+
+  const h1 = prompt ? `<h1>Hello! ${prompt}</h1>` : "<h1>Hello!</h1>";
+
   // Set headers for SSE
   res.setHeader("Content-Type", "text/event-stream");
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
 
   const mockResponses = [
-    { id: 1, role: "assistant", message: "<h1>Hello! </h1>" },
+    { id: 1, role: "assistant", message: h1 },
     { id: 2, role: "assistant", message: "<p>How can I assist " },
     { id: 3, role: "assistant", message: "you today? " },
     { id: 4, role: "assistant", message: "<strong>I am a chatbot 😎</strong>" },
@@ -44,9 +49,8 @@ app.get("/stream", async (req, res) => {
       clearInterval(interval);
       res.end();
     }
-  }, 500); // Simulate a delay for a real-time effect
+  }, 500);
 
-  // Clean up on client disconnect
   req.on("close", () => {
     clearInterval(interval);
     res.end();
