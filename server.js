@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+const getOpenAi = require("./openai");
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -8,6 +10,10 @@ app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Test Event Stream 😎");
+});
+
+app.get("/openai", (req, res) => {
+  getOpenAi(req, res);
 });
 
 app.get("/stream", async (req, res) => {
@@ -24,12 +30,17 @@ app.get("/stream", async (req, res) => {
     { id: 1, role: "assistant", message: h1 },
     { id: 2, role: "assistant", message: "<p>How can I assist " },
     { id: 3, role: "assistant", message: "you today? " },
-    { id: 4, role: "assistant", message: "<strong>I am a chatbot 😎</strong>" },
-    { id: 5, role: "assistant", message: "simulating responses.</p>" },
+    {
+      id: 4,
+      role: "assistant",
+      message: "<strong> I am a chatbot 😎</strong>",
+    },
+    { id: 5, role: "assistant", message: "simulating responses. " },
     {
       id: 6,
       role: "assistant",
-      message: "<a href='https://google.com'>More details</a>",
+      message:
+        "<a data-type-id='citation' href='https://app.klue.com/card/147640'>1</a> </p>",
     },
   ];
 
