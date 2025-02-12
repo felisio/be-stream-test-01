@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/stream", async (req, res) => {
-  const { prompt } = req.body;
+  const { prompt } = JSON.parse(decodeURIComponent(req.query.prompt));
 
   const h1 = prompt ? `<h1>Hello! ${prompt}</h1>` : "<h1>Hello!</h1>";
 
