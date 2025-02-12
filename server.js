@@ -19,8 +19,13 @@ app.get("/stream", async (req, res) => {
     { id: 1, role: "assistant", message: "<h1>Hello! </h1>" },
     { id: 2, role: "assistant", message: "<p>How can I assist " },
     { id: 3, role: "assistant", message: "you today? " },
-    { id: 4, role: "assistant", message: "<strong>I am a chatbot<strong>" },
+    { id: 4, role: "assistant", message: "<strong>I am a chatbot 😎</strong>" },
     { id: 5, role: "assistant", message: "simulating responses.</p>" },
+    {
+      id: 6,
+      role: "assistant",
+      message: "<a href='google.com'>More details</a>",
+    },
   ];
 
   let index = 0;
