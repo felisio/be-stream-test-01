@@ -24,7 +24,7 @@ app.get("/stream", async (req, res) => {
     {
       id: 6,
       role: "assistant",
-      message: "<a href='google.com'>More details</a>",
+      message: "<a href='https://google.com'>More details</a>",
     },
   ];
 
