@@ -15,28 +15,27 @@ app.get("/stream", async (req, res) => {
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
 
-  // Send a message every 2 seconds
-
-  /* const intervalId = setInterval(() => {
-    const data = JSON.stringify({ message: `Server time: ${new Date().toLocaleTimeString()}` });
-    res.write(`data: ${data}\n\n`); // SSE format: "data: <content>\n\n"
-  }, 2000);
- */
-
-  const mockResponse = [
-    "Hello! ",
-    "How can I assist ",
-    "you today? ",
-    "I am a chatbot ",
-    "simulating responses.",
+  const mockResponses = [
+    { id: 1, role: "assistant", message: "<h1>Hello! </h1>" },
+    { id: 2, role: "assistant", message: "<p>How can I assist " },
+    { id: 3, role: "assistant", message: "you today? " },
+    { id: 4, role: "assistant", message: "<strong>I am a chatbot<strong>" },
+    { id: 5, role: "assistant", message: "simulating responses.</p>" },
   ];
+
   let index = 0;
   const interval = setInterval(() => {
-    if (index < mockResponse.length) {
-      res.write(`data: ${mockResponse[index]}\n\n`);
+    if (index < mockResponses.length) {
+      res.write(`data: ${JSON.stringify(mockResponses[index])}\n\n`);
       index++;
     } else {
-      res.write("data: [DONE]\n\n");
+      res.write(
+        `data: ${JSON.stringify({
+          id: "done",
+          role: "system",
+          message: "[DONE]",
+        })}\n\n`
+      );
       clearInterval(interval);
       res.end();
     }
