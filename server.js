@@ -41,6 +41,12 @@ app.get("/stream", async (req, res) => {
       role: "assistant",
       message:
         "<a data-type-id='citation' href='https://app.klue.com/card/147640'>1</a> </p>",
+      sources: [
+        {
+          title: "[1] Card Klue",
+          url: "https://app.klue.com/card/147640",
+        },
+      ],
     },
   ];
 
@@ -55,6 +61,12 @@ app.get("/stream", async (req, res) => {
           id: "done",
           role: "system",
           message: "[DONE]",
+          sources: [
+            {
+              title: "[1] Card Klue",
+              url: "https://app.klue.com/card/147640",
+            },
+          ],
         })}\n\n`
       );
       clearInterval(interval);
