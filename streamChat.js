@@ -1,33 +1,10 @@
-const express = require("express");
-const cors = require("cors");
-const getOpenAi = require("./openai");
-const streamChat = require("./streamChat");
-
-const app = express();
-const port = process.env.PORT || 3000;
-
-app.use(express.json());
-app.use(cors());
-
-app.get("/", (req, res) => {
-  res.send("Test Event Stream 😎");
-});
-
-app.get("/openai", (req, res) => {
-  getOpenAi(req, res);
-});
-
-app.get("/stream-chat", (req, res) => {
-  streamChat(req, res);
-});
-
-app.get("/stream", async (req, res) => {
-  const { prompt } = JSON.parse(decodeURIComponent(req.query.prompt));
+function streamChat(req, res) {
+  const { prompt } = req.body;
 
   const h1 = prompt ? `<h1>Hello! ${prompt}</h1>` : "<h1>Hello!</h1>";
 
   // Set headers for SSE
-  res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Content-Type", "text/plain");
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
 
@@ -83,8 +60,6 @@ app.get("/stream", async (req, res) => {
     clearInterval(interval);
     res.end();
   });
-});
+}
 
-app.listen(port, () => {
-  console.log(`Sandbox listening on port ${port}`);
-});
+module.exports = streamChat;
