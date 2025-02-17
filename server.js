@@ -17,7 +17,7 @@ app.get("/openai", (req, res) => {
   getOpenAi(req, res);
 });
 
-app.get("/stream-chat", (req, res) => {
+app.post("/stream-chat", (req, res) => {
   streamChat(req, res);
 });
 
