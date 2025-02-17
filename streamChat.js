@@ -35,11 +35,11 @@ function streamChat(req, res) {
   let index = 0;
   const interval = setInterval(() => {
     if (index < mockResponses.length) {
-      res.write(`data: ${JSON.stringify(mockResponses[index])}\n\n`);
+      res.write(`${JSON.stringify(mockResponses[index])}\n\n`);
       index++;
     } else {
       res.write(
-        `data: ${JSON.stringify({
+        `${JSON.stringify({
           id: "done",
           role: "system",
           message: "[DONE]",
